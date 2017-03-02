@@ -110,7 +110,24 @@ function loaded()
 
             if ( typeof keys[ e.keyCode ] != 'undefined' ) 
             {
-                // utiliser une fonction move correspondante
+                switch ( key ) 
+        {
+            case 'left':
+                moveLeftPiece();
+                break;
+
+            case 'right':
+                moveRightPiece();
+                break;
+
+            case 'down':
+                moveDownPiece();
+                break;
+
+            case 'rotate':
+                // à voir
+                break;
+        }
             }
         };
 
