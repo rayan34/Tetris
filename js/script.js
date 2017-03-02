@@ -95,20 +95,28 @@ function moveDownPiece(){
 
 
 
-function loaded() 
+function move(event) 
     {
-
-        document.body.onkeydown = function( e ) 
-        {
+       var key = ' ';
+       if (codeTouche == 40){
+		key = 'down';
+	}
+	if (codeTouche == 39){
+		key = 'right'
+        }
+	if (codeTouche == 37){
+		key = 'left'
+        }
+	if (codeTouche == 38){
+		key = 'rotate'
+        }
+	else{
+	    key ='undefined';
+	}
             // les touches directionnelles sont prises en compte
-            var keys = {
-                37: 'left',
-                39: 'right',
-                40: 'down',
-                38: 'rotate'
-            };
+    
 
-            if ( typeof keys[ e.keyCode ] != 'undefined' ) 
+            if (key != 'undefined' ) 
             {
                 switch ( key ) 
         {
@@ -135,4 +143,4 @@ function loaded()
 
     };
 
-
+bod.addEventListener('keydown',move);
