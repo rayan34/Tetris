@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //VARIABLES
 
 var plateau;		//plateau de jeu
@@ -41,3 +42,48 @@ function moveDownPiece(){
 		}
 	}
 }
+=======
+// les différentes valeures de typesPiece :
+/*  1 : barre
+ 
+	*
+	*
+	*
+	* 
+*/ 
+
+/*  2 : carre
+ 
+	* *
+	* *
+*/ 
+/*  3 : L
+ 
+	*
+	*
+	* *
+*/ 
+/*  4 : L à l'envers
+ 
+	  *
+	  *
+    * *
+*/ 
+/*  5 : S
+ 
+	  * *
+    * *
+*/ 
+/*  6 : S à l'envers
+ 
+	* *
+	  * *
+*/ 
+/*  7 : T
+ 
+	* * *
+	  *
+*/ 
+var typePiece = 1; 
+function genererPiece(i,j,typePiece);
+>>>>>>> 391d959b759cdaca87b4d55f402a7d272151562c
