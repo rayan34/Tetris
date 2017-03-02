@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //VARIABLES
 
 var plateau;		//plateau de jeu
