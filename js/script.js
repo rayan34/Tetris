@@ -59,9 +59,51 @@ function moveDownPiece(){
 	}
 }
 
-/* function genererPiece(i,j,typePiece) {
-	
-} */
+function estVide(i, j) {
+	var verif = false;
+	if(plateau[i][j] == 0) {
+		verif = true;
+	}
+	return verif;
+}
+
+function genererPiece(i,j,typePiece) {
+//Fonction qui génére la prochaine pièce en haut de la grille	
+	var i = 0; //position de départ ligne
+	var j = 5; //position de départ colonne
+	switch(typePiece) {
+    case 1: //la pièce est de type barre
+        if (estVide(i,j) {
+			plateau[i][j] == 1
+			plateau[i+1][j] == 1;
+			plateau[i+2][j] == 1;
+        break;
+        
+    case 2:
+        code block
+        break;
+        
+	case 3:
+        code block
+        break;
+        
+    case 4:
+        code block
+        break;
+        
+    case 5:
+        code block
+        break;
+        
+    case 6:
+        code block
+        break;
+        
+    case 7:
+        code block
+        break;
+}
+} 
 
 // les différentes valeures de typesPiece :
 /*  1 : barre
@@ -111,20 +153,28 @@ function moveDownPiece(){
 
 
 
-function loaded() 
+function move(event) 
     {
-
-        document.body.onkeydown = function( e ) 
-        {
+       var key = ' ';
+       if (codeTouche == 40){
+		key = 'down';
+	}
+	if (codeTouche == 39){
+		key = 'right'
+        }
+	if (codeTouche == 37){
+		key = 'left'
+        }
+	if (codeTouche == 38){
+		key = 'rotate'
+        }
+	else{
+	    key ='undefined';
+	}
             // les touches directionnelles sont prises en compte
-            var keys = {
-                37: 'left',
-                39: 'right',
-                40: 'down',
-                38: 'rotate'
-            };
+    
 
-            if ( typeof keys[ e.keyCode ] != 'undefined' ) 
+            if (key != 'undefined' ) 
             {
                 switch ( key ) 
         {
@@ -151,4 +201,4 @@ function loaded()
 
     };
 
-
+bod.addEventListener('keydown',move);
