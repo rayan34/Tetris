@@ -1,11 +1,26 @@
 
 //VARIABLES
 
-var plateau;		//plateau de jeu
-var score = 0;		//score du joueur
-var nbLignes = 0;	//nombre de lignes validées par le joueur
-var typePiece = 1;  //type de la pièce 
+var plateau;					//plateau de jeu
+var score = 0;					//score du joueur
+var nbLignes = 0;				//nombre de lignes validées par le joueur
+var typePiece = randomPiece();	//type de la pièce 
+
 //FONCTIONS
+
+function randomX(){
+//retourne un nombre aléatoire entre 0 et 10
+	var min = Math.ceil(0);
+	var max = Math.floor(10);
+	return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function randomPiece(){
+//retourne un nombre aléatoire entre 1 et 7
+	var min = Math.ceil(1);
+	var max = Math.floor(8);
+	return Math.floor(Math.random() * (max - min)) + min;
+}
 
 function initializePlateau(){
 //Fonction qui va initialiser le tableau de jeu
@@ -137,18 +152,9 @@ function genererPiece(i,j,typePiece) {
 
 
 
-/* function loaded() 
+function loaded() 
     {
-        console.log("Tetris : fichiers audio chargés.");
 
-        oMap.newGame();
-
-    
-         * Gestion des touches directionnelles
-         * 
-         * @param  {[type]} e [description]
-         * @return {[type]}   [description]
-         
         document.body.onkeydown = function( e ) 
         {
             // les touches directionnelles sont prises en compte
@@ -161,13 +167,29 @@ function genererPiece(i,j,typePiece) {
 
             if ( typeof keys[ e.keyCode ] != 'undefined' ) 
             {
-                oMap.keyPress( keys[ e.keyCode ] );
-                oGame.render();
+                switch ( key ) 
+        {
+            case 'left':
+                moveLeftPiece();
+                break;
+
+            case 'right':
+                moveRightPiece();
+                break;
+
+            case 'down':
+                moveDownPiece();
+                break;
+
+            case 'rotate':
+                // à voir
+                break;
+        }
             }
         };
 
 
-        setInterval( oGame.render, 30 );
+
     };
-*/
+
 
