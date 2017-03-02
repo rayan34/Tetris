@@ -110,18 +110,9 @@ function moveDownPiece(){
 
 
 
-/* function loaded() 
+function loaded() 
     {
-        console.log("Tetris : fichiers audio chargés.");
 
-        oMap.newGame();
-
-    
-         * Gestion des touches directionnelles
-         * 
-         * @param  {[type]} e [description]
-         * @return {[type]}   [description]
-         
         document.body.onkeydown = function( e ) 
         {
             // les touches directionnelles sont prises en compte
@@ -134,13 +125,29 @@ function moveDownPiece(){
 
             if ( typeof keys[ e.keyCode ] != 'undefined' ) 
             {
-                oMap.keyPress( keys[ e.keyCode ] );
-                oGame.render();
+                switch ( key ) 
+        {
+            case 'left':
+                moveLeftPiece();
+                break;
+
+            case 'right':
+                moveRightPiece();
+                break;
+
+            case 'down':
+                moveDownPiece();
+                break;
+
+            case 'rotate':
+                // à voir
+                break;
+        }
             }
         };
 
 
-        setInterval( oGame.render, 30 );
+
     };
-*/
+
 
