@@ -1,10 +1,13 @@
-var i = { size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: 'cyan'   }; /*  
-																					*
-																					*
-																					*
-																					* 
-																				*/ 
+// les différentes valeures de typesPiece :
+/*  1 : barre
+ 
+	*
+	*
+	*
+	* 
+*/ 
 
+<<<<<<< HEAD
 var j = { size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: 'blue'   }; /* 
 																					*
 																					*
@@ -78,3 +81,39 @@ var z = { size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: 'red'    }; 
         setInterval( oGame.render, 30 );
     };
 */
+=======
+/*  2 : carre
+ 
+	* *
+	* *
+*/ 
+/*  3 : L
+ 
+	*
+	*
+	* *
+*/ 
+/*  4 : L à l'envers
+ 
+	  *
+	  *
+    * *
+*/ 
+/*  5 : S
+ 
+	  * *
+    * *
+*/ 
+/*  6 : S à l'envers
+ 
+	* *
+	  * *
+*/ 
+/*  7 : T
+ 
+	* * *
+	  *
+*/ 
+var typePiece = 1; 
+function genererPiece(i,j,typePiece);
+>>>>>>> 391d959b759cdaca87b4d55f402a7d272151562c
