@@ -4,7 +4,7 @@
 var plateau;		//plateau de jeu
 var score = 0;		//score du joueur
 var nbLignes = 0;	//nombre de lignes validées par le joueur
-
+var typePiece = 1;  //type de la pièce 
 //FONCTIONS
 
 function initializePlateau(){
@@ -42,7 +42,11 @@ function moveDownPiece(){
 		}
 	}
 }
-=======
+
+/* function genererPiece(i,j,typePiece) {
+	
+} */
+
 // les différentes valeures de typesPiece :
 /*  1 : barre
  
@@ -88,10 +92,8 @@ function moveDownPiece(){
 	* * *
 	  *
 */ 
-var typePiece = 1; 
-function genererPiece(i,j,typePiece) {
-	
-}
+
+
 
 /* function loaded() 
     {
