@@ -62,7 +62,7 @@ function moveDownPiece(){
 function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
 	for(var i = 0; i < 10; i++){
-		for(var j = 0; j >= 19; j++){
+		for(var j = 0; j <= 19; j++){
 			if(plateau[i][j] == 1){
 				plateau[i][j] = 0;
 				plateau[i][j-1] = 1;
