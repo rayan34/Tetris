@@ -5,7 +5,7 @@ var plateau;					//plateau de jeu
 var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
-var couleurs = ['red', 'yellow', 'blue', 'purple', 'green', 'orange', 'maroon']
+
 
 //FONCTIONS
 
@@ -102,12 +102,12 @@ function estVide(i, j) {
 	return verif;
 }
 
-function genererPiece(i,j,typePiece) {
+function genererPiece(typePiece) {
 //Fonction qui génére la prochaine pièce en haut de la grille	
 	var i = 0; //ligne de départ de la pièce
-	var j = 5; //colonne de départ de la pièce
+	var j = 9; //colonne de départ de la pièce
 	switch(typePiece) {
-    case 1: //la pièce est de type barre
+    case 1: //la pièce est de type I
         if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+3, j) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
@@ -121,7 +121,7 @@ function genererPiece(i,j,typePiece) {
 		}
         break;
         
-    case 2: //la pièce est de type carré
+    case 2: //la pièce est de type O
        if (estVide(i,j) && estVide(i+1, j) && estVide(i, j+1) && estVide(i, j+2) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
@@ -149,7 +149,7 @@ function genererPiece(i,j,typePiece) {
 		}
         break;
         
-    case 4: //la pièce est de type L à l'envers
+    case 4: //la pièce est de type J
         if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j-1) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
@@ -177,7 +177,7 @@ function genererPiece(i,j,typePiece) {
 		}
         break;
         
-    case 6: //la pièce est de type S à l'envers 
+    case 6: //la pièce est de type Z
         if (estVide(i,j) && estVide(i, j+1) && estVide(i+1, j+1) && estVide(i+1, j+2) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
@@ -208,7 +208,7 @@ function genererPiece(i,j,typePiece) {
 } 
 
 // les différentes valeures de typesPiece :
-/*  1 : barre
+/*  1 : I
  
 	*
 	*
@@ -220,7 +220,7 @@ function genererPiece(i,j,typePiece) {
 
 
 
-/*  2 : carré
+/*  2 : O
  
 	* *
 	* *
@@ -231,7 +231,7 @@ function genererPiece(i,j,typePiece) {
 	*
 	* *
 */ 
-/*  4 : L à l'envers
+/*  4 : J
  
 	  *
 	  *
@@ -242,7 +242,7 @@ function genererPiece(i,j,typePiece) {
 	  * *
         * *
 */ 
-/*  6 : S à l'envers
+/*  6 : Z
  
 	* *
 	  * *
