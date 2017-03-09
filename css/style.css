@@ -18,9 +18,14 @@ h3 {
 
 } 
 
+img{
+z-index:1;
+}
+
 #case{
 height : 24px;
 width : 24px;
+z-index:2;
 }
 
 #game {

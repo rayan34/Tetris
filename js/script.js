@@ -6,10 +6,15 @@ var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
 var perdu = false;
-
-genererPiece(1);
+//document.body.onload = init;
+init();
 
 //FONCTIONS
+
+function init(){
+	initializePlateau();
+	genererPiece(1);
+}
 
 function randomX(){
 //retourne un nombre aléatoire entre 0 et 10
@@ -104,6 +109,7 @@ function moveDownAll(limite){
 		}
 	}
 }
+
 function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
 	for(var i = 0; i < 10; i++){
@@ -177,10 +183,8 @@ var bool=true;
 		}
 	}
 	return bool;	
-	
-
-
 }
+
 /*
 function Rotate(){
 //Fonction qui permet de tourner la pièce
@@ -195,11 +199,11 @@ function Rotate(){
 } */
 
 function moveRightPiece(){
-
+}
 
 function estVide(i, j) {
 	var verif = false;
-	if(i>0 && i<10 && j>0 && j<20) {
+	if(i>=0 && i<10 && j>=0 && j<20) {
 		if(plateau[i][j] == 0) {
 			verif = true;
 		}
@@ -211,18 +215,20 @@ function createCase(i, j){
 //Fonction qui crée l'image d'une case à la position[i,j]
 	var caseP = document.createElement("div");
 	caseP.id = 'case';
+	var img = document.createElement("img");
+	img.src = './images/Case.png';
+	caseP.appendChild(img);
 	document.getElementById("pieces").appendChild(caseP);
-	caseP.src = './../images/Case.png';
 	caseP.style.left = 24*i;	
 	caseP.style.top = 24*j;
 
 }
 
-function genererPiece(typePiece) {
+function genererPiece(type) {
 //Fonction qui génére la prochaine pièce en haut de la grille	
 	var i = 5; //ligne de départ de la pièce
 	var j = 0; //colonne de départ de la pièce
-	switch(typePiece) {
+	switch(type) {
     case 1: //la pièce est de type I
         if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+3, j)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
@@ -325,7 +331,7 @@ function genererPiece(typePiece) {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
         break;
-}
+	}
 } 
 
 // les différentes valeures de typesPiece :
@@ -374,8 +380,7 @@ function genererPiece(typePiece) {
 	  *
 */ 
 
-function move(event) 
-    {
+function move(event) {
        var key = ' ';
        if (codeTouche == 40){
 		key = 'down';
@@ -417,9 +422,8 @@ function move(event)
         }
 
 
-
-    }
-
-/*var b = document.body;
+/*
+genererPiece(1);
+var b = document.body;
 b.addEventListener('keydown',move);
 */
