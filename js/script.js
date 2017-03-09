@@ -14,6 +14,7 @@ init();
 function init(){
 	initializePlateau();
 	genererPiece(1);
+	affichage();
 }
 
 function randomX(){
@@ -420,6 +421,12 @@ function move(event) {
 				}
             }
         }
+
+function affichage(){
+
+ setInterval(function(){ moveDownPiece(); }, 1000);
+
+}
 
 
 /*
