@@ -1,7 +1,7 @@
 header { 
   padding : 1px 0; 
   background : #D8D8D8;
-	
+  border-radius: 20px;
   text-align : center; 
   font-weight : bold; 
 } 
@@ -30,8 +30,8 @@ z-index:2;
 
 #game {
   margin-top: 10px;
-  height:800px;
-  width:500px;	
+  height:456px;
+  width:240px;	
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -42,3 +42,31 @@ z-index:2;
 body{
 background-image: url(../images/fond.jpg);
 }
+
+    aside
+    {
+		margin-top: 10px;
+		position: absolute;
+		background-color: #706b64;
+		box-shadow: 0px 2px 5px #1c1a19;
+		border-radius: 5px;
+		padding-bottom: 700px;
+		color: white;
+		font-size: 0.9em;
+		margin-left: 80%;
+		margin-right: auto;
+		padding-left: 80px;
+		padding-right: 80px;
+        
+    }
+    
+    footer{
+		position: absolute;
+		bottom: 0;
+		background : #D8D8D8;
+		border-radius: 20px;
+		font-weight : bold;
+		padding-left: 80%;
+		padding-right: 10%;
+
+    }
