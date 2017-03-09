@@ -177,9 +177,12 @@ var bool=true;
 		for(var j = 19; j >= 0; j--){
 			if(plateau[i][j] == 1 && j==19 ){
 				bool=false;
+				plateau[i][j] == 2;
+
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
 				bool=false;
+				plateau[i][j] == 2;
 			}
 		}
 	}
