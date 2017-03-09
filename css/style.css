@@ -18,14 +18,17 @@ h3 {
 
 } 
 
-img{
-z-index:1;
+#tableau{
+	height:100%;
 }
 
-#case{
-height : 24px;
-width : 24px;
-z-index:2;
+#pieces{
+	height:100%;
+	position:relative;
+}
+
+img{
+	position:absolute;
 }
 
 #game {
