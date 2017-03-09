@@ -3,23 +3,19 @@
 <head>
 	<meta charset='UTF-8'>
 	<link href='./css/style.css' rel='stylesheet' type='text/css'>
-<<<<<<< HEAD
-	<script src='./js/scipt.js'></script>
-=======
-	<script src='./js/script.js'></script>
->>>>>>> c3b5facd3d3a671adc4812b13491375bede643ec
+	<script defer src='./js/script.js'></script>
 	<title>Tetris</title>
 </head>
 	<body>
 		<header>
 			<h1> Tetris trop swag </h1>
-<<<<<<< HEAD
-			<h3> made by Hugo, Rayan, David </h3>
-=======
->>>>>>> c3b5facd3d3a671adc4812b13491375bede643ec
+			
 		</header>
-		<div class="separateur"></div>
-		
+		<aside>
+			<h1> Scores:</h1>
+			<div class="separateur"></div>
+			<div id="score"> </div>
+		</aside>
 		<main id="game">
 		<div class="t">
   		<canvas id="tableau">
@@ -28,9 +24,12 @@
   			</div>
   		</canvas>
 		</div>
-
   		<div id="infos">
   		</div>
 		</main>
+		<footer>
+			<h3> made by </h3>
+			<h3>Hugo,Rayan,David </h3>
+		</footer>
 	</body>
 </html>
