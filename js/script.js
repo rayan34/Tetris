@@ -51,7 +51,7 @@ function moveDownPiece(){
 //Fonction qui déplace la pièce d'une case vers le bas
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1){
+			if(plateau[i][j] == 1 && colisionDown()){
 				plateau[i][j] = 0;
 				plateau[i][j+1] = 1;
 			}
@@ -63,7 +63,7 @@ function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
 	for(var i = 0; i < 10; i++){
 		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1){
+			if(plateau[i][j] == 1 && colisionLeft()){
 				plateau[i][j] = 0;
 				plateau[i-1][j] = 1;
 			}
