@@ -30,7 +30,7 @@ function initializePlateau(){
 	plateau = new Array(10);
 	for(var i = 0; i < 10; i++){
 		plateau[i] = new Array(20);
-		for(var j = 0; j < 20; j++){
+			for(var j = 0; j < 20; j++){
 			plateau[i][j] = 0;
 		}
 	}
@@ -42,28 +42,25 @@ function VerifLignes(){
 	for(var i = 0; i < 20; i++){
 		for(var j = 0; j < 10; j++){
 			if(plateau[j][i]== 0){
-			   bool = false;
+				bool = false;
 			}
 		}
-	if(bool= true){
-		return i;
-	}
+		if(bool= true){
+			return i;
+		}
 	}
 	return bool;
-
-
 }
 
 function SupressionLignes(ligne){
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
 			if(j==ligne){
-			   plateau[i][j]==0;
+				plateau[i][j]==0;
 			}
 		}
 	}
 	moveDownAll(ligne);
-				
 }
 
 // Pareil que colision down
@@ -95,41 +92,41 @@ function moveDownPiece(){
 
 function moveDownAll(limite){
 //Fonction qui déplace la pièce d'une case vers le bas
-	for(var i = 0; i < 10; i++){
-		for(var j = limite; j >= 0; j--){
-			if(plateau[i][j] == 2 && colisionDown()){
-				plateau[i][j] = 0;
-				plateau[i][j+1] = 1;
-			}
+for(var i = 0; i < 10; i++){
+	for(var j = limite; j >= 0; j--){
+		if(plateau[i][j] == 2 && colisionDown()){
+			plateau[i][j] = 0;
+			plateau[i][j+1] = 1;
 		}
 	}
 }
+}
 function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
-	for(var i = 0; i < 10; i++){
-		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1 && colisionLeft()){
-				plateau[i][j] = 0;
-				plateau[i-1][j] = 1;
-			}
+for(var i = 0; i < 10; i++){
+	for(var j = 0; j <= 19; j++){
+		if(plateau[i][j] == 1 && colisionLeft()){
+			plateau[i][j] = 0;
+			plateau[i-1][j] = 1;
 		}
 	}
+}
 }
 
 function moveRightPiece(){
 //Fonction qui déplace la pièce d'une vers la droite
-	for(var i = 10; i < 0; i--){
-		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1 && colisionRight()){
-				plateau[i][j] = 0;
-				plateau[i+1][j] = 1;
-			}
+for(var i = 10; i < 0; i--){
+	for(var j = 0; j <= 19; j++){
+		if(plateau[i][j] == 1 && colisionRight()){
+			plateau[i][j] = 0;
+			plateau[i+1][j] = 1;
 		}
 	}
 }
+}
 
 function colisionLeft(){
-var bool=true;
+	var bool=true;
 	for(var i = 0; i < 10; i++){
 		for(var j = 0; j <= 19; j++){
 			if(plateau[i][j] == 1 && i==0 ){
@@ -141,13 +138,10 @@ var bool=true;
 		}
 	}
 	return bool;	
-	
-
-
 }
 
 function colisionRight(){
-var bool=true;
+	var bool=true;
 	for(var i = 10; i < 0; i--){
 		for(var j = 0; j <= 19; j++){
 			if(plateau[i][j] == 1 && i==10 ){
@@ -159,13 +153,10 @@ var bool=true;
 		}
 	}
 	return bool;	
-	
-
-
 }
 
 function colisionDown(){
-var bool=true;
+	var bool=true;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
 			if(plateau[i][j] == 1 && j==19 ){
@@ -177,9 +168,6 @@ var bool=true;
 		}
 	}
 	return bool;	
-	
-
-
 }
 /*
 function Rotate(){
@@ -197,24 +185,24 @@ function Rotate(){
 function moveRightPiece(){
 
 
-function estVide(i, j) {
-	var verif = false;
-	if(i>0 && i<10 && j>0 && j<20) {
-		if(plateau[i][j] == 0) {
-			verif = true;
+	function estVide(i, j) {
+		var verif = false;
+		if(i>0 && i<10 && j>0 && j<20) {
+			if(plateau[i][j] == 0) {
+				verif = true;
+			}
 		}
+		return verif;
 	}
-	return verif;
-}
 
-function createCase(i, j){
+	function createCase(i, j){
 //Fonction qui crée l'image d'une case à la position[i,j]
-	var caseP = document.createElement("div");
-	caseP.id = 'case';
-	document.getElementById("pieces").appendChild(caseP);
-	caseP.src = './../images/Case.png';
-	caseP.style.left = 24*i;	
-	caseP.style.top = 24*j;
+var caseP = document.createElement("div");
+caseP.id = 'case';
+document.getElementById("pieces").appendChild(caseP);
+caseP.src = './../images/Case.png';
+caseP.style.left = 24*i;	
+caseP.style.top = 24*j;
 
 }
 
@@ -224,7 +212,7 @@ function genererPiece(typePiece) {
 	var j = 0; //colonne de départ de la pièce
 	switch(typePiece) {
     case 1: //la pièce est de type I
-        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+3, j)) {
+    if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+3, j)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -240,10 +228,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
     case 2: //la pièce est de type O
-       if (estVide(i,j) && estVide(i+1, j) && estVide(i, j+1) && estVide(i, j+2)) {
+    if (estVide(i,j) && estVide(i+1, j) && estVide(i, j+1) && estVide(i, j+2)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -254,10 +242,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
 	case 3: //la pièce est de type L
-        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j+1)) {
+	if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -268,10 +256,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
     case 4: //la pièce est de type J
-        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j-1)) {
+    if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j-1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -282,10 +270,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
     case 5: //la pièce est de type S
-        if (estVide(i,j) && estVide(i+1, j) && estVide(i+1, j-1) && estVide(i, j+1)) {
+    if (estVide(i,j) && estVide(i+1, j) && estVide(i+1, j-1) && estVide(i, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -296,10 +284,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
     case 6: //la pièce est de type Z
-        if (estVide(i,j) && estVide(i, j+1) && estVide(i+1, j+1) && estVide(i+1, j+2)) {
+    if (estVide(i,j) && estVide(i, j+1) && estVide(i+1, j+1) && estVide(i+1, j+2)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
@@ -310,10 +298,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-        
+		break;
+
     case 7: //la pièce est de type T
-        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+1, j+1)) {
+    if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+1, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1
 			plateau[i][j+1] == 1;
@@ -324,9 +312,10 @@ function genererPiece(typePiece) {
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
-        break;
-}
+		break;
+	}
 } 
+
 
 // les différentes valeures de typesPiece :
 /*  1 : I
@@ -335,95 +324,86 @@ function genererPiece(typePiece) {
 	*
 	*
 	* 
-*/ 
+	
 
 // Pour l'initialisation, gestion des touches , lorsque une touche valide à été pressé, on lance render ( rendu ) et on dit à la "map" quelle touche a été préssé
 
 
 
-/*  2 : O
+2 : O
  
 	* *
 	* *
-*/ 
-/*  3 : L
+
+3 : L
  
 	*
 	*
 	* *
-*/ 
-/*  4 : J
+
+ 4 : J
  
 	  *
 	  *
-        * *
-*/ 
-/*  5 : S
+    * *
+5 : S
  
 	  * *
         * *
-*/ 
-/*  6 : Z
+6 : Z
  
 	* *
 	  * *
-*/ 
-/*  7 : T
+7 : T
  
 	* * *
 	  *
 */ 
 
 
+/*	  function move(event) {
+	  	var key = ' ';
+	  	if (codeTouche == 40){
+	  		key = 'down';
+	  	}
+	  	if (codeTouche == 39){
+	  		key = 'right'
+	  	}
+	  	if (codeTouche == 37){
+	  		key = 'left'
+	  	}
+	  	if (codeTouche == 38){
+	  		key = 'rotate'
+	  	}
+	  	else{
+	  		key ='undefined';
+	  	}
+        // les touches directionnelles sont prises en compte
 
-function move(event) 
-    {
-       var key = ' ';
-       if (codeTouche == 40){
-		key = 'down';
-	}
-	if (codeTouche == 39){
-		key = 'right'
-        }
-	if (codeTouche == 37){
-		key = 'left'
-        }
-	if (codeTouche == 38){
-		key = 'rotate'
-        }
-	else{
-	    key ='undefined';
-	}
-            // les touches directionnelles sont prises en compte
-    
 
-            if (key != 'undefined' ) 
-            {
-                switch ( key ) 
-        {
-            case 'left':
-                moveLeftPiece();
-                break;
+        if (key != 'undefined' ) {
+            switch ( key ){
+            	case 'left':
+            	moveLeftPiece();
+            	break;
 
-            case 'right':
-                moveRightPiece();
-                break;
+            	case 'right':
+            	moveRightPiece();
+            	break;
 
-            case 'down':
-                moveDownPiece();
-                break;
-
-            case 'rotate':
+            	case 'down':
+            	moveDownPiece();
+            	break;
+            	
+            	case 'rotate':
                 // à voir
                 break;
-        }
+                
             }
-        };
-
-
-
-    };
-
-/*var b = document.body;
+        }
+    }
+*/
+/*
+var b = document.body;
 b.addEventListener('keydown',move);
 */
