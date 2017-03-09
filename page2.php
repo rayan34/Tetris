@@ -15,10 +15,10 @@
 			<h1> Scores:</h1>
 			<div class="separateur"></div>
 			<div id="score"> 
-				
+				<?php include 'requete.php';?>
 			</div>
 			
-					<?php echo "bite"?>
+
 				
 		</aside>
 		<main id="game">
