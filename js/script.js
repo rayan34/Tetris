@@ -5,6 +5,7 @@ var plateau;					//plateau de jeu
 var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
+var couleurs = ['red', 'yellow', 'blue', 'purple', 'green', 'orange', 'maroon']
 
 //FONCTIONS
 
@@ -103,38 +104,105 @@ function estVide(i, j) {
 
 function genererPiece(i,j,typePiece) {
 //Fonction qui génére la prochaine pièce en haut de la grille	
-	var i = 0; //position de départ ligne
-	var j = 5; //position de départ colonne
+	var i = 0; //ligne de départ de la pièce
+	var j = 5; //colonne de départ de la pièce
 	switch(typePiece) {
     case 1: //la pièce est de type barre
-        if (estVide(i,j) {
-			plateau[i][j] == 1
+        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+3, j) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
 			plateau[i+1][j] == 1;
 			plateau[i+2][j] == 1;
+			plateau[i+3][j] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-    case 2:
-        code block
+    case 2: //la pièce est de type carré
+       if (estVide(i,j) && estVide(i+1, j) && estVide(i, j+1) && estVide(i, j+2) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
+			plateau[i+1][j] == 1;
+			plateau[i][j+1] == 1;
+			plateau[i][j+2] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-	case 3:
-        code block
+	case 3: //la pièce est de type L
+        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j+1) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
+			plateau[i+1][j] == 1;
+			plateau[i+2][j] == 1;
+			plateau[i+2][j+1] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-    case 4:
-        code block
+    case 4: //la pièce est de type L à l'envers
+        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+2, j-1) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
+			plateau[i+1][j] == 1;
+			plateau[i+2][j] == 1;
+			plateau[i][j-1] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-    case 5:
-        code block
+    case 5: //la pièce est de type S
+        if (estVide(i,j) && estVide(i+1, j) && estVide(i+1, j-1) && estVide(i, j+1) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
+			plateau[i+1][j] == 1;
+			plateau[i+1][j-1] == 1;
+			plateau[i][j+1] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-    case 6:
-        code block
+    case 6: //la pièce est de type S à l'envers 
+        if (estVide(i,j) && estVide(i, j+1) && estVide(i+1, j+1) && estVide(i+1, j+2) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1;
+			plateau[i+1][j] == 1;
+			plateau[i+1][j-1] == 1;
+			plateau[i][j+1] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
         
-    case 7:
-        code block
+    case 7: //la pièce est de type T
+        if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+1, j+1) {
+			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
+			plateau[i][j] == 1
+			plateau[i][j+1] == 1;
+			plateau[i][j+2] == 1;
+			plateau[i+1][j+1] == 1;
+			return true; // on retourne vrai si on a réussi à créer la pièce
+		}
+		else {
+			return false; // on retourne faux si au moins une des cases était déjà occupée
+		}
         break;
 }
 } 
@@ -152,7 +220,7 @@ function genererPiece(i,j,typePiece) {
 
 
 
-/*  2 : carre
+/*  2 : carré
  
 	* *
 	* *
@@ -167,12 +235,12 @@ function genererPiece(i,j,typePiece) {
  
 	  *
 	  *
-    * *
+        * *
 */ 
 /*  5 : S
  
 	  * *
-    * *
+        * *
 */ 
 /*  6 : S à l'envers
  
