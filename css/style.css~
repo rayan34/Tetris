@@ -6,11 +6,6 @@ header {
   font-weight : bold; 
 } 
 
-h3 {
-   text-align : right;
-   font-style: italic;
-}
-
 .separateur { 
   height : 1px; 
   background : #717171; 
