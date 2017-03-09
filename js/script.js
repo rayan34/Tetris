@@ -73,10 +73,10 @@ function SupressionLignes(ligne){
 				
 }
 
-function getPx(i){
+function getPxTop(i){
 	var str = "";
-	for(var a= 0 ; a<4; a++){
-		if(str+tabImg[i].style.top[a]!="p"){
+	for(var a= 0 ; a<5; a++){
+		if(tabImg[i].style.top[a]!="p"){
 		str= str+tabImg[i].style.top[a];
 		}
 		else{
@@ -84,7 +84,29 @@ function getPx(i){
 		}
 	} 
 }
+function getPxLeft(i){
+	var str = "";
+	for(var a= 0 ; a<5; a++){
+		if(tabImg[i].style.left[a]!="p"){
+		str= str+tabImg[i].style.left[a];
+		}
+		else{
+		return str;
+		}
+	} 
+}
 
+function getPxRight(i){
+	var str = "";
+	for(var a= 0 ; a<5; a++){
+		if(tabImg[i].style.right[a]!="p"){
+		str= str+tabImg[i].style.right[a];
+		}
+		else{
+		return str;
+		}
+	} 
+}
 
 // Pareil que colision down
 function verifPieceBloque(){
@@ -92,7 +114,7 @@ function verifPieceBloque(){
 	var resultat = false;
 	for(var i = 0; i < 10; i++){
 		for(var j = 0; j < 20; j++){
-			if(j == 19 | (plateau[i][j] == 1 & plateau[i][j+1] == 2)) {
+			if(plateau[i][j] == 1 & (j == 19 || plateau[i][j+1] == 2)) {
 				resultat = true;
 			}
 		}
@@ -103,19 +125,35 @@ function verifPieceBloque(){
 
 function moveDownPiece(){
 //Fonction qui déplace la pièce d'une case vers le bas
-	var a=3;
-	for(var i = 0; i < 10; i++){
-		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1 ){ //&& colisionDown()
-				plateau[i][j] = 0;
-				plateau[i][j+1] = 1;
-				var px=getPx(a);
-				px=px/24;
-				tabImg[a].style.top = 24*(j+1) +"px";
-				a--;
+	var a=0;
+	if(colisionDown()==false){
+		for(var i = 9; i >= 0; i--){
+			for(var j = 19; j >= 0; j--){
+				if(plateau[i][j] == 1){
+					plateau[i][j] = 0;
+					plateau[i][j+1] = 1;
+					var px=getPxTop(a);
+					px=px/24;
+					tabImg[a].style.top = 24*(px +1) +"px";
+					a++;
+				}
 			}
 		}
 	}
+	else{
+		for(var i = 9; i >= 0; i--){
+			for(var j = 19; j >= 0; j--){
+				if(plateau[i][j] == 1){
+					plateau[i][j]=2;
+				}
+			}
+		}	
+	}
+	if(a==0){
+	return true;
+	}
+	return false;
+	
 }
 
 function moveDownAll(limite){
@@ -133,37 +171,56 @@ function moveDownAll(limite){
 
 function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
+	var a=0;
+	if(colisionLeft()==false){				
 	for(var i = 0; i < 10; i++){
 		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1 && colisionLeft()){
+			if(plateau[i][j] == 1){
 				plateau[i][j] = 0;
 				plateau[i-1][j] = 1;
+				var px=getPxLeft(a);
+				px=px/24;
+				tabImg[a].style.left = 24*(px-1) +"px";
+				a++;
 			}
 		}
 	}
+	}
 }
 
-function moveRightPiece(){
+function moveRightPiece(){ 
 //Fonction qui déplace la pièce d'une vers la droite
-	for(var i = 10; i < 0; i--){
-		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1 && colisionRight()){
-				plateau[i][j] = 0;
-				plateau[i+1][j] = 1;
+	var a=0;
+	alert("lol");
+	if(colisionRight()==false){
+		alert("mdr2");
+		for(var i = 10; i < 0; i--){
+			alert("salut");
+			for(var j = 0; j <= 19; j++){
+				console.log("lolo");
+				if(plateau[i][j] == 1){
+					alert("mdr");
+					plateau[i][j] = 0;
+					plateau[i+1][j] = 1;
+					var px=getPxRight(a);
+					px=px/24;
+					tabImg[a].style.right = 24*(px+1) +"px";
+					a++;
+				}
 			}
 		}
 	}
 }
 
 function colisionLeft(){
-var bool=true;
-	for(var i = 0; i < 10; i++){
+var bool=false;
+	for(var i = 0; i <= 9; i++){
 		for(var j = 0; j <= 19; j++){
 			if(plateau[i][j] == 1 && i==0 ){
-				bool=false;
+				bool=true;
 			}
 			if(plateau[i][j] == 1 && plateau[i-1][j]==2 ){
-				bool=false;
+				bool=true;
 			}
 		}
 	}
@@ -174,14 +231,14 @@ var bool=true;
 }
 
 function colisionRight(){
-var bool=true;
-	for(var i = 10; i < 0; i--){
+var bool=false;
+	for(var i = 9; i <= 0; i--){
 		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1 && i==10 ){
-				bool=false;
+			if(plateau[i][j] == 1 && i==9 ){
+				bool=true;
 			}
 			if(plateau[i][j] == 1 && plateau[i+1][j]==2 ){
-				bool=false;
+				bool=true;
 			}
 		}
 	}
@@ -192,20 +249,23 @@ var bool=true;
 }
 
 function colisionDown(){
-var bool=true;
+var bool=false;
+var compt = 0;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1 && j==19 ){
-				bool=false;
+			if(plateau[i][j] == 1 && j==19){
+				bool=true;
 				plateau[i][j] == 2;
-
+				compt++;
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
-				bool=false;
+				bool=true;
 				plateau[i][j] == 2;
+				compt++;
 			}
 		}
 	}
+
 	return bool;	
 }
 
@@ -467,53 +527,41 @@ function genererPiece(typePiece) {
 */ 
 
 function move(event) {
+var codeTouche = event.keyCode;
        var key = ' ';
        if (codeTouche == 40){
 		key = 'down';
+		moveDownPiece();
 	}
 	if (codeTouche == 39){
 		key = 'right';
+		moveRightPiece();
         }
 	if (codeTouche == 37){
 		key = 'left';
+		moveLeftPiece();
+
         }
 	if (codeTouche == 38){
 		key = 'rotate';
+		moveLeftPiece();
         }
 	else{
 	    key ='undefined';
 	}
-            // les touches directionnelles sont prises en compte
-    
-
-            if (key != 'undefined' ) {
-                switch ( key ){
-					case 'left':
-						moveLeftPiece();
-						break;
-
-					case 'right':
-						moveRightPiece();
-						break;
-
-					case 'down':
-						moveDownPiece();
-						break;
-
-					case 'rotate':
-						// à voir
-						break;
-				}
-            }
         }
 
 function affichage(){
+	setInterval(function(){
+	  if(moveDownPiece()==true){
+		genererPiece(randomPiece())
+	  } 
 
- setInterval(function(){ moveDownPiece(); }, 1000);
-
+	}, 500);
 }
 
-
+var b = document.body;
+b.addEventListener('keydown',move);
 /*
 genererPiece(1);
 var b = document.body;
