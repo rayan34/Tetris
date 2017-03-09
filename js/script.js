@@ -6,6 +6,7 @@ var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
 var perdu = false;
+var tabImg =  [null,null,null,null];
 //document.body.onload = init;
 init();
 
@@ -72,6 +73,19 @@ function SupressionLignes(ligne){
 				
 }
 
+function getPx(i){
+	var str = "";
+	for(var a= 0 ; a<4; a++){
+		if(str+tabImg[i].style.top[a]!="p"){
+		str= str+tabImg[i].style.top[a];
+		}
+		else{
+		return str;
+		}
+	} 
+}
+
+
 // Pareil que colision down
 function verifPieceBloque(){
 //Fonction qui renvoie true si la pièce est bloqué par en dessous
@@ -89,11 +103,16 @@ function verifPieceBloque(){
 
 function moveDownPiece(){
 //Fonction qui déplace la pièce d'une case vers le bas
+	var a=3;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1 && colisionDown()){
+			if(plateau[i][j] == 1 ){ //&& colisionDown()
 				plateau[i][j] = 0;
 				plateau[i][j+1] = 1;
+				var px=getPx(a);
+				px=px/24;
+				tabImg[a].style.top = 24*(j+1) +"px";
+				a--;
 			}
 		}
 	}
@@ -105,7 +124,8 @@ function moveDownAll(limite){
 		for(var j = limite; j >= 0; j--){
 			if(plateau[i][j] == 2 && colisionDown()){
 				plateau[i][j] = 0;
-				plateau[i][j+1] = 1;
+				plateau[i][j+1] = 2;
+				
 			}
 		}
 	}
@@ -202,8 +222,7 @@ function Rotate(){
 	}
 } */
 
-function moveRightPiece(){
-}
+
 
 function estVide(i, j) {
 	var verif = false;
@@ -251,7 +270,7 @@ function createCase(i, j, couleur){
 	document.getElementById("pieces").appendChild(img);
 	img.style.left = 24*i +"px";	
 	img.style.top = 24*j +"px";
-
+	return img;
 }
 
 function genererPiece(typePiece) {
@@ -262,14 +281,15 @@ function genererPiece(typePiece) {
     case 1: //la pièce est de type I
         if (estVide(i,j) && estVide(i, j+1) && estVide(i, j+2) && estVide(i, j+3)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i][j+2] == 1;
-			plateau[i][j+3] == 1;
-			createCase(i,j,1);
-			createCase(i,j+1,1);
-			createCase(i,j+2,1);
-			createCase(i,j+3,1);
+			plateau[i][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i][j+2] = 1;
+			plateau[i][j+3] = 1;
+			tabImg[0] = createCase(i,j,1);
+			tabImg[1] = createCase(i,j+1,1);
+			tabImg[2] = createCase(i,j+2,1);
+			tabImg[3] = createCase(i,j+3,1);
+
 			
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
@@ -281,14 +301,16 @@ function genererPiece(typePiece) {
     case 2: //la pièce est de type O
        if (estVide(i,j) && estVide(i+1, j) && estVide(i, j+1) && estVide(i+1, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i+1][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i+1][j+1] == 1;
-			createCase(i,j,2);
-			createCase(i+1,j,2);
-			createCase(i,j+1,2);
-			createCase(i+1,j+1,2);
+
+			plateau[i][j] = 1;
+			plateau[i+1][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i+1][j+1] = 1;
+			tabImg[0] = createCase(i,j,2);
+			tabImg[1] = createCase(i+1,j,2);
+			tabImg[2] = createCase(i,j+1,2);
+			tabImg[3] = createCase(i+1,j+1,2);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -299,14 +321,16 @@ function genererPiece(typePiece) {
 	case 3: //la pièce est de type L
         if (estVide(i,j) && estVide(i, j+1) && estVide(i, j+2) && estVide(i+1, j+2)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i][j+2] == 1;
-			plateau[i+1][j+2] == 1;
-			createCase(i,j,3);
-			createCase(i,j+1,3);
-			createCase(i,j+2,3);
-			createCase(i+1,j+2,3);
+
+			plateau[i][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i][j+2] = 1;
+			plateau[i+1][j+2] = 1;
+			tabImg[0] = createCase(i,j,3);
+			tabImg[1] = createCase(i,j+1,3);
+			tabImg[2] = createCase(i,j+2,3);
+			tabImg[3] = createCase(i+1,j+2,3);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -317,14 +341,16 @@ function genererPiece(typePiece) {
     case 4: //la pièce est de type J
         if (estVide(i,j) && estVide(i, j+1) && estVide(i, j+2) && estVide(i-1, j+2)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i][j+2] == 1;
-			plateau[i-1][j+2] == 1;
-			createCase(i,j,4);
-			createCase(i,j+1,4);
-			createCase(i,j+2,4);
-			createCase(i-1,j+2,4);
+
+			plateau[i][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i][j+2] = 1;
+			plateau[i-1][j+2] = 1;
+			tabImg[0] = createCase(i,j,4);
+			tabImg[1] = createCase(i,j+1,4);
+			tabImg[2] = createCase(i,j+2,4);
+			tabImg[3] = createCase(i-1,j+2,4);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -335,14 +361,16 @@ function genererPiece(typePiece) {
     case 5: //la pièce est de type S
         if (estVide(i,j) && estVide(i, j+1) && estVide(i-1, j+1) && estVide(i+1, j)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i-1][j+1] == 1;
-			plateau[i+1][j] == 1;
-			createCase(i,j,5);
-			createCase(i,j+1,5);
-			createCase(i-1,j+1,5);
-			createCase(i+1,j,5);
+
+			plateau[i][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i-1][j+1] = 1;
+			plateau[i+1][j] = 1;
+			tabImg[0] = createCase(i,j,5);
+			tabImg[1] = createCase(i,j+1,5);
+			tabImg[2] = createCase(i-1,j+1,5);
+			tabImg[3] = createCase(i+1,j,5);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -353,14 +381,16 @@ function genererPiece(typePiece) {
     case 6: //la pièce est de type Z
         if (estVide(i,j) && estVide(i-1, j) && estVide(i, j+1) && estVide(i+1, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1;
-			plateau[i-1][j] == 1;
-			plateau[i][j+1] == 1;
-			plateau[i+1][j+1] == 1;
-			createCase(i,j,6);
-			createCase(i-1,j,6);
-			createCase(i,j+1,6);
-			createCase(i+1,j+1,6);
+
+			plateau[i][j] = 1;
+			plateau[i-1][j] = 1;
+			plateau[i][j+1] = 1;
+			plateau[i+1][j+1] = 1;
+			tabImg[0] = createCase(i,j,6);
+			tabImg[1] = createCase(i-1,j,6);
+			tabImg[2] = createCase(i,j+1,6);
+			tabImg[3] = createCase(i+1,j+1,6);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -371,14 +401,16 @@ function genererPiece(typePiece) {
     case 7: //la pièce est de type T
         if (estVide(i,j) && estVide(i+1, j) && estVide(i-1, j) && estVide(i, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
-			plateau[i][j] == 1
-			plateau[i+1][j] == 1;
-			plateau[i-1][j] == 1;
-			plateau[i][j+1] == 1;
-			createCase(i,j,7);
-			createCase(i+1,j,7);
-			createCase(i-1,j,7);
-			createCase(i,j+1,7);
+
+			plateau[i][j] = 1
+			plateau[i+1][j] = 1;
+			plateau[i-1][j] = 1;
+			plateau[i][j+1] = 1;
+			tabImg[0] = createCase(i,j,7);
+			tabImg[1] = createCase(i+1,j,7);
+			tabImg[2] = createCase(i-1,j,7);
+			tabImg[3] = createCase(i,j+1,7);
+
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
