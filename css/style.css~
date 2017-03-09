@@ -12,11 +12,6 @@ header {
 
 } 
 
-#case{
-height : 24px;
-width : 24px;
-}
-
 #game {
   margin-top: 10px;
   height:800px;
