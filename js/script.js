@@ -374,8 +374,6 @@ function genererPiece(typePiece) {
 	  *
 */ 
 
-
-
 function move(event) 
     {
        var key = ' ';
@@ -383,13 +381,13 @@ function move(event)
 		key = 'down';
 	}
 	if (codeTouche == 39){
-		key = 'right'
+		key = 'right';
         }
 	if (codeTouche == 37){
-		key = 'left'
+		key = 'left';
         }
 	if (codeTouche == 38){
-		key = 'rotate'
+		key = 'rotate';
         }
 	else{
 	    key ='undefined';
@@ -397,32 +395,30 @@ function move(event)
             // les touches directionnelles sont prises en compte
     
 
-            if (key != 'undefined' ) 
-            {
-                switch ( key ) 
-        {
-            case 'left':
-                moveLeftPiece();
-                break;
+            if (key != 'undefined' ) {
+                switch ( key ){
+					case 'left':
+						moveLeftPiece();
+						break;
 
-            case 'right':
-                moveRightPiece();
-                break;
+					case 'right':
+						moveRightPiece();
+						break;
 
-            case 'down':
-                moveDownPiece();
-                break;
+					case 'down':
+						moveDownPiece();
+						break;
 
-            case 'rotate':
-                // à voir
-                break;
-        }
+					case 'rotate':
+						// à voir
+						break;
+				}
             }
-        };
+        }
 
 
 
-    };
+    }
 
 /*var b = document.body;
 b.addEventListener('keydown',move);
