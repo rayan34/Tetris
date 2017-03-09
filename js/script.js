@@ -34,6 +34,37 @@ function initializePlateau(){
 	}
 }
 
+function VerifLignes(){
+	// return la ligne à supprimer ou false ( conditions à mettre dans la boucles principale FONCTION DE GITAN
+	var bool = true;
+	for(var i = 0; i < 20; i++){
+		for(var j = 0; j < 10; j++){
+			if(plateau[j][i]== 0){
+			   bool = false;
+			}
+		}
+	if(bool= true){
+		return i;
+	}
+	}
+	return bool;
+
+
+}
+
+function SupressionLignes(ligne){
+	for(var i = 0; i < 10; i++){
+		for(var j = 19; j >= 0; j--){
+			if(j==ligne){
+			   plateau[i][j]==0;
+			}
+		}
+	}
+	moveDownAll(ligne);
+				
+}
+
+// Pareil que colision down
 function verifPieceBloque(){
 //Fonction qui renvoie true si la pièce est bloqué par en dessous
 	var resultat = false;
@@ -47,6 +78,7 @@ function verifPieceBloque(){
 	return resultat;
 }
 
+
 function moveDownPiece(){
 //Fonction qui déplace la pièce d'une case vers le bas
 	for(var i = 0; i < 10; i++){
@@ -59,6 +91,17 @@ function moveDownPiece(){
 	}
 }
 
+function moveDownAll(limite){
+//Fonction qui déplace la pièce d'une case vers le bas
+	for(var i = 0; i < 10; i++){
+		for(var j = limite; j >= 0; j--){
+			if(plateau[i][j] == 2 && colisionDown()){
+				plateau[i][j] = 0;
+				plateau[i][j+1] = 1;
+			}
+		}
+	}
+}
 function moveLeftPiece(){
 //Fonction qui déplace la pièce d'une case la gauche
 	for(var i = 0; i < 10; i++){
@@ -123,7 +166,7 @@ function colisionDown(){
 var bool=true;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1 && i==10 ){
+			if(plateau[i][j] == 1 && j==19 ){
 				bool=false;
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
