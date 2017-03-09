@@ -65,21 +65,76 @@ function moveLeftPiece(){
 		for(var j = 0; j >= 19; j++){
 			if(plateau[i][j] == 1){
 				plateau[i][j] = 0;
-				plateau[i][j-1] = 1;
+				plateau[i-1][j] = 1;
 			}
 		}
 	}
 }
+
 function moveRightPiece(){
 //Fonction qui déplace la pièce d'une vers la droite
-	for(var i = 0; i < 10; i++){
+	for(var i = 10; i < 0; i--){
 		for(var j = 0; j <= 19; j++){
-			if(plateau[i][j] == 1){
+			if(plateau[i][j] == 1 && colisionRight()){
 				plateau[i][j] = 0;
-				plateau[i][j+1] = 1;
+				plateau[i+1][j] = 1;
 			}
 		}
 	}
+}
+
+function colisionLeft(){
+var bool=true;
+	for(var i = 0; i < 10; i++){
+		for(var j = 0; j <= 19; j++){
+			if(plateau[i][j] == 1 && i==0 ){
+				bool=false;
+			}
+			if(plateau[i][j] == 1 && plateau[i-1][j]==2 ){
+				bool=false;
+			}
+		}
+	}
+	return bool;	
+	
+
+
+}
+
+function colisionRight(){
+var bool=true;
+	for(var i = 10; i < 0; i--){
+		for(var j = 0; j <= 19; j++){
+			if(plateau[i][j] == 1 && i==10 ){
+				bool=false;
+			}
+			if(plateau[i][j] == 1 && plateau[i+1][j]==2 ){
+				bool=false;
+			}
+		}
+	}
+	return bool;	
+	
+
+
+}
+
+function colisionDown(){
+var bool=true;
+	for(var i = 0; i < 10; i++){
+		for(var j = 19; j >= 0; j--){
+			if(plateau[i][j] == 1 && i==10 ){
+				bool=false;
+			}
+			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
+				bool=false;
+			}
+		}
+	}
+	return bool;	
+	
+
+
 }
 /*
 function Rotate(){
@@ -93,6 +148,9 @@ function Rotate(){
 		}
 	}
 } */
+
+function moveRightPiece(){
+
 
 function estVide(i, j) {
 	var verif = false;

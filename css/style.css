@@ -1,0 +1,23 @@
+header { 
+  padding : 1px 0; 
+  background : #D802D8; 
+  text-align : center; 
+  font-weight : bold; 
+} 
+
+.separateur { 
+  height : 1px; 
+  background : #717171; 
+  border-bottom : 1px solid #313030;
+
+} 
+
+#game {
+  margin-top: 10px;
+  height:800px;
+  width:500px;	
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+}

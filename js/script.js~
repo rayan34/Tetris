@@ -5,10 +5,7 @@ var plateau;					//plateau de jeu
 var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
-<<<<<<< HEAD
-=======
 var couleurs = ['red', 'yellow', 'blue', 'purple', 'green', 'orange', 'maroon']
->>>>>>> 1a82b40933215b1675d315ef7d2c5fddbf20fc4d
 
 //FONCTIONS
 
@@ -62,6 +59,64 @@ function moveDownPiece(){
 	}
 }
 
+function moveLeftPiece(){
+//Fonction qui déplace la pièce d'une case la gauche
+	for(var i = 0; i < 10; i++){
+		for(var j = 0; j >= 19; j++){
+			if(plateau[i][j] == 1){
+				plateau[i][j] = 0;
+				plateau[i-1][j] = 1;
+			}
+		}
+	}
+}
+
+function moveRightPiece(){
+//Fonction qui déplace la pièce d'une vers la droite
+	for(var i = 10; i < 0; i--){
+		for(var j = 0; j <= 19; j++){
+			if(plateau[i][j] == 1 && colision()){
+				plateau[i][j] = 0;
+				plateau[i+1][j] = 1;
+			}
+		}
+	}
+}
+
+function colision(){
+var bool=true;
+	for(var i = 10; i < 0; i--){
+		for(var j = 0; j <= 19; j++){
+			if(plateau[i][j] == 1 && i==0 ){
+				bool=false;
+			}
+			if(plateau[i][j] == 1 && plateau[i-1][j]==2 ){
+				bool=false;
+			}
+		}
+	}
+	return bool;	
+	
+
+
+}
+
+/*
+function Rotate(){
+//Fonction qui permet de tourner la pièce
+	for(var i = 0; i < 10; i++){
+		for(var j = 0; j >= 19; j++){
+			if(plateau[i][j] == 1){
+				plateau[i][j] = 0;
+				plateau[i][j+1] = 1;
+			}
+		}
+	}
+} */
+
+function moveRightPiece(){
+
+
 function estVide(i, j) {
 	var verif = false;
 	if(plateau[i][j] == 0) {
@@ -72,40 +127,6 @@ function estVide(i, j) {
 
 function genererPiece(i,j,typePiece) {
 //Fonction qui génére la prochaine pièce en haut de la grille	
-<<<<<<< HEAD
-	var i = 0; //position de départ ligne
-	var j = 5; //position de départ colonne
-	switch(typePiece) {
-    case 1: //la pièce est de type barre
-        if (estVide(i,j) {
-			plateau[i][j] == 1
-			plateau[i+1][j] == 1;
-			plateau[i+2][j] == 1;
-        break;
-        
-    case 2:
-        code block
-        break;
-        
-	case 3:
-        code block
-        break;
-        
-    case 4:
-        code block
-        break;
-        
-    case 5:
-        code block
-        break;
-        
-    case 6:
-        code block
-        break;
-        
-    case 7:
-        code block
-=======
 	var i = 0; //ligne de départ de la pièce
 	var j = 5; //colonne de départ de la pièce
 	switch(typePiece) {
@@ -197,15 +218,14 @@ function genererPiece(i,j,typePiece) {
         if (estVide(i,j) && estVide(i+1, j) && estVide(i+2, j) && estVide(i+1, j+1) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 			plateau[i][j] == 1
-			plateau[i+1][j] == 1;
-			plateau[i+2][j] == 1;
+			plateau[i][j+1] == 1;
+			plateau[i][j+2] == 1;
 			plateau[i+1][j+1] == 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
 			return false; // on retourne faux si au moins une des cases était déjà occupée
 		}
->>>>>>> 1a82b40933215b1675d315ef7d2c5fddbf20fc4d
         break;
 }
 } 
