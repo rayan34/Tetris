@@ -3,26 +3,37 @@
 <head>
 	<meta charset='UTF-8'>
 	<link href='./css/style.css' rel='stylesheet' type='text/css'>
-	<script src='./js/script.js'></script>
+	
 	<title>Tetris</title>
 </head>
 	<body>
 		<header>
 			<h1> Tetris trop swag </h1>
+			
 		</header>
-		<div class="separateur"></div>
-		
+		<aside>
+			<h1> Scores:</h1>
+			<div class="separateur"></div>
+			<div id="score"> 
+				
+			</div>
+			
+					<?php echo "bite"?>
+				
+		</aside>
 		<main id="game">
-		<div class="t">
-  		<canvas id="tableau">
+  		<div id="tableau">
   			<div id="pieces">
-
   			</div>
-  		</canvas>
-		</div>
-
+  		</div>
   		<div id="infos">
   		</div>
 		</main>
+		<script src='./js/script.js'></script>
+
+		<footer>
+			<p> made by </p>
+			<p>Hugo,Rayan,David </p>
+		</footer>
 	</body>
 </html>
