@@ -53,14 +53,12 @@ class Model {
         try {
             // préparation de la requête
             $sql = "SELECT * FROM score WHERE score = (SELECT MAX(score) from score);"; 
-            $req_prep = self::$pdo->prepare($sql);
-            var_dump(req_prep);
-            // passage de la valeur de name_tag
-            //$values = array("name_tag" => $name."%");
+            $req = self::$pdo->prepare($sql);
+            //var_dump(req_prep);
             // exécution de la requête préparée
-            //$req_prep->execute($values);
-            //$req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
+            $req->execute();
+            $req->setFetchMode(PDO::FETCH_OBJ);
+            $tabResults = $req->fetchAll();
             // renvoi du tableau de résultats
             return $tabResults;
         } catch (PDOException $e) {
@@ -78,4 +76,4 @@ Model::init_pdo();
 $res = Model::selectHighScore();
 
 //on affiche le résultat avec une fonction plus lisible par js
-echo json_encode($res);
+//echo json_encode($res);
