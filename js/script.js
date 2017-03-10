@@ -44,33 +44,32 @@ function initializePlateau(){
 }
 
 function VerifLignes(){
-	// return la ligne à supprimer ou false ( conditions à mettre dans la boucles principale FONCTION DE GITAN
+	// return la ligne à supprimer ou false ( conditions à mettre dans la boucles principale
 	var bool = true;
-	for(var i = 0; i < 20; i++){
-		for(var j = 0; j < 10; j++){
-			if(plateau[j][i]== 0){
+	var result = -1;
+	for(var i = 0; i < 10; i++){
+		for(var j = 0; j < 20; j++){
+			if(plateau[i][j]== 0){
 			   bool = false;
 			}
 		}
-		if(bool= true){
-			return i;
+		if(bool){
+			result = j;
 		}
+		bool = true;
 	}
-	return bool;
-
-
+	if (result != -1){
+		return result;
+	} else {
+		return false;
+	}
 }
 
 function SupressionLignes(ligne){
 	for(var i = 0; i < 10; i++){
-		for(var j = 19; j >= 0; j--){
-			if(j==ligne){
-			   plateau[i][j]==0;
-			}
-		}
+		plateau[i][ligne] = 0;
 	}
-	moveDownAll(ligne);
-				
+	moveDownAll(ligne);		
 }
 
 function getPxTop(i){
@@ -159,7 +158,7 @@ function moveDownPiece(){
 
 function moveDownAll(limite){
 //Fonction qui déplace la pièce d'une case vers le bas
-	for(var i = 0; i < 10; i++){
+	function f() {	}for(var i = 0; i < 10; i++){
 		for(var j = limite; j >= 0; j--){
 			if(plateau[i][j] == 2 && colisionDown()){
 				plateau[i][j] = 0;
@@ -253,19 +252,18 @@ var compt = 0;
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
-				var test = VerifLignes();
-				if (test != false){
-				SupressionLignes(ligne);
-
+				var ligne = VerifLignes();
+				if (ligne != false){
+					SupressionLignes(ligne);
 				}
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
-				var test = VerifLignes();
-				if (test != false){
-				SupressionLignes(ligne);
+				var ligne = VerifLignes();
+				if (ligne != false){
+					SupressionLignes(ligne);
 				}
 			}
 		}
