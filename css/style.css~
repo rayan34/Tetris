@@ -1,0 +1,34 @@
+header { 
+  padding : 1px 0; 
+  background : #D8D8D8;
+	
+  text-align : center; 
+  font-weight : bold; 
+} 
+
+.separateur { 
+  height : 1px; 
+  background : #717171; 
+  border-bottom : 1px solid #313030;
+
+} 
+
+#case{
+height : 24px;
+width : 24px;
+}
+
+#game {
+  margin-top: 10px;
+  height:800px;
+  width:500px;	
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  background-image: url(../images/jeu.jpg);
+}
+
+body{
+background-image: url(../images/fond.jpg);
+}

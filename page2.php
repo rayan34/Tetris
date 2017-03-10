@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<link href='./css/style.css' rel='stylesheet' type='text/css'>
+	
+	<title>Tetris</title>
+</head>
+	<body>
+		<header>
+			<h1> Tetris trop swag </h1>
+			
+		</header>
+		<aside>
+			<h1> Scores:</h1>
+			<div class="separateur"></div>
+			<div id="score"> 
+				<?php include 'requete.php';?>
+			</div>
+			
+
+				
+		</aside>
+		<main id="game">
+  		<div id="tableau">
+  			<div id="pieces">
+  			</div>
+  		</div>
+  		<div id="infos">
+  		</div>
+		</main>
+		<script src='./js/script.js'></script>
+
+		<footer>
+			<p> made by </p>
+			<p>Hugo,Rayan,David </p>
+		</footer>
+	</body>
+</html>
