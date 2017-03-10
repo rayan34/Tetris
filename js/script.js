@@ -7,6 +7,8 @@ var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
 var perdu = false;
 var tabImg =  [null,null,null,null];
+var score = 0;
+
 //document.body.onload = init;
 init();
 
@@ -17,6 +19,11 @@ function init(){
 	genererPiece(randomPiece());
 	affichage();
 }
+
+function getScore() {
+	return score;
+}
+
 
 function randomX(){
 //retourne un nombre aléatoire entre 0 et 10
@@ -270,7 +277,7 @@ var compt = 0;
 			}
 		}
 	}
-
+	score = score +10;
 	return bool;	
 }
 
@@ -513,7 +520,7 @@ function genererPiece(typePiece) {
  
 	  *
 	  *
-    * *
+          * *
 */ 
 /*  5 : S
  
@@ -564,6 +571,8 @@ function affichage(){
 
 	}, 500);
 }
+
+
 
 var b = document.body;
 b.addEventListener('keydown',move);
