@@ -14,15 +14,18 @@
 		<aside>
 			<h1> Scores:</h1>
 			<div class="separateur"></div>
-			<div id="score"> </div>
+			<div id="score"> 
+				
+			</div>
+			
+					<?php echo "bite"?>
+				
 		</aside>
 		<main id="game">
-		<div class="t">
-  		<canvas id="tableau">
+  		<div id="tableau">
   			<div id="pieces">
   			</div>
-  		</canvas>
-		</div>
+  		</div>
   		<div id="infos">
   		</div>
 		</main>

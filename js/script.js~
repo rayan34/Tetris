@@ -63,11 +63,9 @@ function VerifLignes(){
 
 function SupressionLignes(ligne){
 	for(var i = 0; i < 10; i++){
-		for(var j = 19; j >= 0; j--){
-			if(j==ligne){
-			   plateau[i][j]==0;
+			   plateau[i][ligne]==0;
+			   // enlever les images
 			}
-		}
 	}
 	moveDownAll(ligne);
 				
@@ -98,9 +96,10 @@ function getPxLeft(i){
 
 function getPxRight(i){
 	var str = "";
+
 	for(var a= 0 ; a<5; a++){
-		if(tabImg[i].style.right[a]!="p"){
-		str= str+tabImg[i].style.right[a];
+		if(tabImg[i].style.left[a]!="p"){
+		str= str+tabImg[i].style.left[a];
 		}
 		else{
 		return str;
@@ -191,19 +190,15 @@ function moveLeftPiece(){
 function moveRightPiece(){ 
 //Fonction qui déplace la pièce d'une vers la droite
 	var a=0;
-	alert("lol");
 	if(colisionRight()==false){
-		alert("mdr2");
-		for(var i = 10; i < 0; i--){
+		for(var i = 9; i >= 0; i--){
 			for(var j = 0; j <= 19; j++){
-				console.log("lolo");
 				if(plateau[i][j] == 1){
-					alert("mdr");
 					plateau[i][j] = 0;
 					plateau[i+1][j] = 1;
 					var px=getPxRight(a);
 					px=px/24;
-					tabImg[a].style.right = 24*(px+1) +"px";
+					tabImg[a].style.left = 24*(px+1) +"px";
 					a++;
 				}
 			}
@@ -231,7 +226,7 @@ var bool=false;
 
 function colisionRight(){
 var bool=false;
-	for(var i = 9; i <= 0; i--){
+	for(var i = 9; i >= 0; i--){
 		for(var j = 0; j <= 19; j++){
 			if(plateau[i][j] == 1 && i==9 ){
 				bool=true;
@@ -256,11 +251,20 @@ var compt = 0;
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
+				var test = VerifLignes();
+				if (test != false){
+				SupressionLignes(ligne);
+
+				}
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
+				var test = VerifLignes();
+				if (test != false){
+				SupressionLignes(ligne);
+				}
 			}
 		}
 	}
