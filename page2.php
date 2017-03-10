@@ -15,7 +15,13 @@
 			<h1> Scores:</h1>
 			<div class="separateur"></div>
 			<div id="score"> 
-				<?php include 'requete.php';?>
+				<?php
+					include 'requete.php';
+
+
+					echo "TOP JOUEUR : " . $res[0]->pseudo . "<br>TOP SCORE : " . $res[0]->score;
+				?>
+
 			</div>
 			
 
