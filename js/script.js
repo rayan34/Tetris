@@ -64,9 +64,8 @@ function VerifLignes(){
 		}
 	}
 	return bool;
-
-
 }
+
 
 function SupressionLignes(ligne){
 	for(var i = 0; i < 10; i++){
