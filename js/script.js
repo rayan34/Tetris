@@ -18,10 +18,11 @@ function init(){
 	initializePlateau();
 	genererPiece(randomPiece());
 	affichage();
+	getScore();
 }
 
 function getScore() {
-	return score;
+	document.getElementById("currentScore").innerHTML = score;
 }
 
 
@@ -62,7 +63,6 @@ function VerifLignes(){
 		}
 		if(bool){
 			result = j;
-			alert(result);
 		}
 		bool = true;
 	}
@@ -170,12 +170,14 @@ function moveDownPiece(){
 
 function moveDownAll(limite){
 //Fonction qui déplace la pièce d'une case vers le bas
-	function f() {	}for(var i = 0; i < 10; i++){
+	for(var i = 0; i < 10; i++){
 		for(var j = limite; j >= 0; j--){
-			if(plateau[i][j] == 2 && colisionDown()){
+			if(plateau[i][j] != 0){
 				plateau[i][j] = 0;
 				plateau[i][j+1] = 2;
-				
+				var img = recupImage(i,j);
+				img.id = i + "-" + (j+1);
+				img.style.top = (j+1)*24 +"px";
 			}
 		}
 	}
@@ -258,7 +260,9 @@ var compt = 0;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
 			if(plateau[i][j] == 1 && j==19){
-				bool=true;
+				if(bool == false){
+					score = score+10;
+				}
 				plateau[i][j] == 2;
 				compt++;
 				for(var k = 0; k < 4; k++){
@@ -266,11 +270,17 @@ var compt = 0;
 				}
 				var ligne = VerifLignes();
 				if (ligne != -1){
+					if(bool == false){
+						score = score+100;
+					}
 					SupressionLignes(ligne);
 				}
+				bool=true;
 			}
 			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
-				bool=true;
+				if(bool == false){
+					score = score+10;
+				}
 				plateau[i][j] == 2;
 				compt++;
 				for(var k = 0; k < 4; k++){
@@ -278,12 +288,16 @@ var compt = 0;
 				}
 				var ligne = VerifLignes();
 				if (ligne != -1){
+					if(bool == false){
+						score = score+100;
+					}
 					SupressionLignes(ligne);
 				}
+				bool=true;
 			}
 		}
 	}
-	score = score +10;
+	getScore();
 	return bool;	
 }
 
@@ -563,6 +577,9 @@ function recupImage(axeI, axeJ){
 	return img;
 }
 
+function getValeurTab(i, j){
+	return plateau[i][j];
+}
 
 
 var b = document.body;
