@@ -8,6 +8,9 @@ var typePiece = randomPiece();	//type de la pièce
 var perdu = false;
 var tabImg =  [null,null,null,null];
 var score = 0;
+var rotation = 0;
+var piece = 0;
+
 
 //document.body.onload = init;
 init();
@@ -81,7 +84,11 @@ function SupressionLignes(ligne){
 		var img = recupImage(i,ligne);
 		img.parentNode.removeChild(img);
 	}
-	moveDownAll(ligne);		
+	moveDownAll(ligne);
+	var l = VerifLignes();
+	if (l != -1) {
+		SupressionLignes(l);
+	}		
 }
 
 function getPxTop(i){
@@ -283,21 +290,6 @@ var compt = 0;
 	return bool;	
 }
 
-/*
-function Rotate(){
-//Fonction qui permet de tourner la pièce
-	for(var i = 0; i < 10; i++){
-		for(var j = 0; j >= 19; j++){
-			if(plateau[i][j] == 1){
-				plateau[i][j] = 0;
-				plateau[i][j+1] = 1;
-			}
-		}
-	}
-} */
-
-
-
 function estVide(i, j) {
 	var verif = false;
 	if(i>=0 && i<10 && j>=0 && j<20) {
@@ -334,8 +326,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i,j+1,1);
 			tabImg[2] = createCase(i,j+2,1);
 			tabImg[3] = createCase(i,j+3,1);
-
-			
+			piece = 1;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -355,7 +347,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i+1,j,2);
 			tabImg[2] = createCase(i,j+1,2);
 			tabImg[3] = createCase(i+1,j+1,2);
-
+			piece = 2;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -375,7 +368,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i,j+1,3);
 			tabImg[2] = createCase(i,j+2,3);
 			tabImg[3] = createCase(i+1,j+2,3);
-
+			piece = 3;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -395,7 +389,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i,j+1,4);
 			tabImg[2] = createCase(i,j+2,4);
 			tabImg[3] = createCase(i-1,j+2,4);
-
+			piece = 4;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -415,7 +410,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i,j+1,5);
 			tabImg[2] = createCase(i-1,j+1,5);
 			tabImg[3] = createCase(i+1,j,5);
-
+			piece = 5;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -435,7 +431,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i-1,j,6);
 			tabImg[2] = createCase(i,j+1,6);
 			tabImg[3] = createCase(i+1,j+1,6);
-
+			piece = 6;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -447,7 +444,7 @@ function genererPiece(typePiece) {
         if (estVide(i,j) && estVide(i+1, j) && estVide(i-1, j) && estVide(i, j+1)) {
 			//on test si toutes les cases nécéssaires à la création de la pièce sont vide
 
-			plateau[i][j] = 1
+			plateau[i][j] = 1;
 			plateau[i+1][j] = 1;
 			plateau[i-1][j] = 1;
 			plateau[i][j+1] = 1;
@@ -455,7 +452,8 @@ function genererPiece(typePiece) {
 			tabImg[1] = createCase(i+1,j,7);
 			tabImg[2] = createCase(i-1,j,7);
 			tabImg[3] = createCase(i,j+1,7);
-
+			piece = 7;
+			rotation = 1;
 			return true; // on retourne vrai si on a réussi à créer la pièce
 		}
 		else {
@@ -529,7 +527,7 @@ var codeTouche = event.keyCode;
         }
 	if (codeTouche == 38){
 		key = 'rotate';
-		moveLeftPiece();
+		rotate();
         }
 	else{
 	    key ='undefined';
@@ -539,7 +537,9 @@ var codeTouche = event.keyCode;
 function affichage(){
 	setInterval(function(){
 	  if(moveDownPiece()==true){
-		genererPiece(randomPiece())
+		if(genererPiece(randomPiece()) == false){
+			alert("YOU LOOSE");
+		}
 	  } 
 
 	}, 500);
@@ -559,10 +559,259 @@ function recupImage(axeI, axeJ){
 	return img;
 }
 
+function modifyPositionImage(img, axeI, axeJ){
+	img.style.left = axeI*24+"px";
+	img.style.top = axeJ*24+"px"
+}
+
 function getValeurTab(i, j){
 	return plateau[i][j];
 }
 
+function rotate(){
+	var i = getPxLeft(0)/24;
+	var j = getPxTop(0)/24;
+	switch(piece){
+		case 1:
+			if(rotation == 1 && i <= 6 && (estVide(i+1, j) && estVide(i+2,j) && estVide(i+3,j))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i+1][j]=1;
+				plateau[i+2][j]=1;
+				plateau[i+3][j]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i+1, j);
+				modifyPositionImage(tabImg[2], i+2, j);
+				modifyPositionImage(tabImg[3], i+3, j);
+				rotation = 2;
+			} else if (rotation == 2 && j <= 16 && (estVide(i, j+1) && estVide(i,j+2) && estVide(i,j+3))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i][j+1]=1;
+				plateau[i][j+2]=1;
+				plateau[i][j+3]=1;
+				modifyPositionImage(tabImg[1], i, j+1);
+				modifyPositionImage(tabImg[2], i, j+2);
+				modifyPositionImage(tabImg[3], i, j+3);
+				rotation = 1;
+			}
+			break;
+		case 3:
+			if(rotation == 1 && i > 0 && (estVide(i-1, j+2) && estVide(i+1,j+1))){
+				deleteOnes();
+				plateau[i-1][j+2]=1;
+				plateau[i][j+2]=1;
+				plateau[i+1][j+2]=1;
+				plateau[i+1][j+1]=1;
+				modifyPositionImage(tabImg[0], i-1, j+2);
+				modifyPositionImage(tabImg[1], i, j+2);
+				modifyPositionImage(tabImg[2], i+1, j+2);
+				modifyPositionImage(tabImg[3], i+1, j+1);
+				rotation = 2;
+			} else if(rotation == 2 && j > 1 && (estVide(i+1, j-2) && estVide(i+2,j-2))){
+				deleteOnes();
+				plateau[i+2][j]=1;
+				plateau[i+2][j-1]=1;
+				plateau[i+2][j-2]=1;
+				plateau[i+1][j-2]=1;
+				modifyPositionImage(tabImg[0], i+2, j);
+				modifyPositionImage(tabImg[1], i+2, j-1);
+				modifyPositionImage(tabImg[2], i+2, j-2);
+				modifyPositionImage(tabImg[3], i+1, j-2);
+				rotation = 3;
+			} else if(rotation = 3 && i > 1 && (estVide(i-2, j-1) && estVide(i-1,j-1) && estVide(i-2,j))){
+				deleteOnes();
+				plateau[i][j-1]=1;
+				plateau[i-1][j-1]=1;
+				plateau[i-2][j-1]=1;
+				plateau[i-2][j]=1;
+				modifyPositionImage(tabImg[0], i, j-1);
+				modifyPositionImage(tabImg[1], i-1, j-1);
+				modifyPositionImage(tabImg[2], i-2, j-1);
+				modifyPositionImage(tabImg[3], i-2, j);
+				rotation = 4;
+			} else if(rotation = 4 && j > 0 && (estVide(i-1, j-1) && estVide(i-1,j+1) && estVide(i,j+1))){
+				deleteOnes();
+				plateau[i-1][j-1]=1;
+				plateau[i-1][j]=1;
+				plateau[i-1][j+1]=1;
+				plateau[i][j+1]=1;
+				modifyPositionImage(tabImg[0], i-1, j-1);
+				modifyPositionImage(tabImg[1], i-1, j);
+				modifyPositionImage(tabImg[2], i-1, j+1);
+				modifyPositionImage(tabImg[3], i, j+1);
+				rotation = 1;
+			} 
+			break;
+		case 4:
+			if(rotation == 1 && i > 1 && (estVide(i-2, j+2) && estVide(i-2,j+1))){
+				deleteOnes();
+				plateau[i][j+2]=1;
+				plateau[i-1][j+2]=1;
+				plateau[i-2][j+2]=1;
+				plateau[i-2][j+1]=1;
+				modifyPositionImage(tabImg[0], i, j+2);
+				modifyPositionImage(tabImg[1], i-1, j+2);
+				modifyPositionImage(tabImg[2], i-2, j+2);
+				modifyPositionImage(tabImg[3], i-2, j+1);
+				rotation = 2;
+			} else if(rotation == 2 && j > 1 && (estVide(i-2, j-2) && estVide(i-1,j-2))){
+				deleteOnes();
+				plateau[i-2][j]=1;
+				plateau[i-2][j-1]=1;
+				plateau[i-2][j-2]=1;
+				plateau[i-1][j-2]=1;
+				modifyPositionImage(tabImg[0], i-2, j);
+				modifyPositionImage(tabImg[1], i-2, j-1);
+				modifyPositionImage(tabImg[2], i-2, j-2);
+				modifyPositionImage(tabImg[3], i-1, j-2);
+				rotation = 3;
+			} else if(rotation = 3 && i < 18 && (estVide(i+1, j-1) && estVide(i+2,j-1) && estVide(i+2,j))){
+				deleteOnes();
+				plateau[i][j-1]=1;
+				plateau[i+1][j-1]=1;
+				plateau[i+2][j-1]=1;
+				plateau[i+2][j]=1;
+				modifyPositionImage(tabImg[0], i, j-1);
+				modifyPositionImage(tabImg[1], i+1, j-1);
+				modifyPositionImage(tabImg[2], i+2, j-1);
+				modifyPositionImage(tabImg[3], i+2, j);
+				rotation = 4;
+			} else if(rotation = 4 && j > 0 && (estVide(i+1, j-1) && estVide(i+1,j+1) && estVide(i,j+1))){
+				deleteOnes();
+				plateau[i+1][j-1]=1;
+				plateau[i+1][j]=1;
+				plateau[i+1][j+1]=1;
+				plateau[i][j+1]=1;
+				modifyPositionImage(tabImg[0], i+1, j-1);
+				modifyPositionImage(tabImg[1], i+1, j);
+				modifyPositionImage(tabImg[2], i+1, j+1);
+				modifyPositionImage(tabImg[3], i, j+1);
+				rotation = 1;
+			} 
+			break;
+		case 5:
+			if(rotation == 1 && j > 0 && (estVide(i-1, j) && estVide(i+1, j+1))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i+1][j]=1;
+				plateau[i+1][j+1]=1;
+				plateau[i][j-1]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i+1, j);
+				modifyPositionImage(tabImg[2], i+1, j+1);
+				modifyPositionImage(tabImg[3], i, j-1);
+				rotation = 2;
+			} else if(rotation == 2 && i > 0 && (estVide(i, j+1) && estVide(i-1, j+1))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i][j+1]=1;
+				plateau[i-1][j+1]=1;
+				plateau[i+1][j]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i, j+1);
+				modifyPositionImage(tabImg[2], i-1, j+1);
+				modifyPositionImage(tabImg[3], i+1, j);
+				rotation = 1;
+			}
+			break;
+		case 6:
+			if(rotation == 1 && j > 0 && (estVide(i+1, j) && estVide(i+1, j-1))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i][j+1]=1;
+				plateau[i+1][j]=1;
+				plateau[i+1][j-1]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i, j+1);
+				modifyPositionImage(tabImg[2], i+1, j);
+				modifyPositionImage(tabImg[3], i+1, j-1);
+				rotation = 2;
+			} else if(rotation == 2 && i > 0 && (estVide(i, j-1) && estVide(i-1, j-1))){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i-1][j]=1;
+				plateau[i][j+1]=1;
+				plateau[i+1][j+1]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i-1, j);
+				modifyPositionImage(tabImg[2], i, j+1);
+				modifyPositionImage(tabImg[3], i+1, j+1);
+				rotation = 1;
+			}
+			break;
+		case 7:
+			if(rotation == 1 && j > 0 && estVide(i, j-1)){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i][j-1]=1;
+				plateau[i][j+1]=1;
+				plateau[i+1][j]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i, j-1);
+				modifyPositionImage(tabImg[2], i, j+1);
+				modifyPositionImage(tabImg[3], i+1, j);
+				rotation = 2;
+			} else if(rotation == 2 && i > 0 && estVide(i-1, j)){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i-1][j]=1;
+				plateau[i+1][j]=1;
+				plateau[i][j-1]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i-1, j);
+				modifyPositionImage(tabImg[2], i+1, j);
+				modifyPositionImage(tabImg[3], i, j-1);
+				rotation = 3;
+			} else if(rotation == 3 && j < 19 && estVide(i, j+1)){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i][j+1]=1;
+				plateau[i][j-1]=1;
+				plateau[i-1][j]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i, j+1);
+				modifyPositionImage(tabImg[2], i, j-1);
+				modifyPositionImage(tabImg[3], i-1, j);
+				rotation = 4;
+			} else if(rotation == 4 && i < 10 && estVide(i+1, j)){
+				deleteOnes();
+				plateau[i][j]=1;
+				plateau[i+1][j]=1;
+				plateau[i-1][j]=1;
+				plateau[i][j+1]=1;
+				modifyPositionImage(tabImg[0], i, j);
+				modifyPositionImage(tabImg[1], i+1, j);
+				modifyPositionImage(tabImg[2], i-1, j);
+				modifyPositionImage(tabImg[3], i, j+1);
+				rotation = 1;
+			} 
+			break;
+		default:
+			break;
+	}
+}
+
+function deleteOnes(){
+	for(var i = 0; i < 10; i++){
+		for(var j = 0; j < 20; j++){
+			if(plateau[i][j] == 1){
+				plateau[i][j] = 0;
+			}
+		}
+	}
+}
+
+function showTableau(){
+	var str = "";
+	for(var j = 0; j < 20; j++){
+		for(var i = 0; i < 10; i++){
+			str += plateau[i][j] + " ";
+		}
+		str +="<br>";
+	}
+	document.getElementById('score').innerHTML = str;
+}
 
 var b = document.body;
 b.addEventListener('keydown',move);
