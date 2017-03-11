@@ -12,7 +12,8 @@
 			
 		</header>
 		<aside>
-			<h1> Scores:</h1>
+			<h1> Score:</h1>
+			<p id="currentScore"></p>
 			<div class="separateur"></div>
 			<div id="score"> 
 				<?php
@@ -21,10 +22,7 @@
 
 					echo "TOP JOUEUR : " . $res[0]->pseudo . "<br>TOP SCORE : " . $res[0]->score;
 				?>
-
 			</div>
-			
-
 				
 		</aside>
 		<main id="game">

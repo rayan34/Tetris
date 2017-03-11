@@ -54,7 +54,6 @@ class Model {
             // préparation de la requête
             $sql = "SELECT * FROM score WHERE score = (SELECT MAX(score) from score);"; 
             $req = self::$pdo->prepare($sql);
-            //var_dump(req_prep);
             // exécution de la requête préparée
             $req->execute();
             $req->setFetchMode(PDO::FETCH_OBJ);

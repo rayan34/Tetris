@@ -7,9 +7,9 @@ var nbLignes = 0;				//nombre de lignes validées par le joueur
 var typePiece = randomPiece();	//type de la pièce 
 var perdu = false;
 var tabImg =  [null,null,null,null];
-var score = 0;
 var rotation = 0;
 var piece = 0;
+
 
 
 //document.body.onload = init;
@@ -18,6 +18,7 @@ init();
 //FONCTIONS
 
 function init(){
+	document.getElementById('pieces').innerHTML = "";
 	initializePlateau();
 	genererPiece(randomPiece());
 	affichage();
@@ -538,7 +539,8 @@ function affichage(){
 	setInterval(function(){
 	  if(moveDownPiece()==true){
 		if(genererPiece(randomPiece()) == false){
-			alert("YOU LOOSE");
+			alert("Perdu!! Voulez-vous rejouer?");
+			location.reload();
 		}
 	  } 
 
@@ -813,8 +815,10 @@ function showTableau(){
 	document.getElementById('score').innerHTML = str;
 }
 
+
 var b = document.body;
 b.addEventListener('keydown',move);
+
 /*
 genererPiece(1);
 var b = document.body;
