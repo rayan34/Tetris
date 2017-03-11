@@ -73,13 +73,13 @@ function VerifLignes(){
 	}
 }
 
-	
-
 
 
 function SupressionLignes(ligne){
 	for(var i = 0; i < 10; i++){
 		plateau[i][ligne] = 0;
+		var img = recupImage(i,ligne);
+		img.parentNode.removeChild(img);
 	}
 	moveDownAll(ligne);		
 }
@@ -250,9 +250,6 @@ var bool=false;
 		}
 	}
 	return bool;	
-	
-
-
 }
 
 function colisionDown(){
@@ -264,6 +261,9 @@ var compt = 0;
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
+				for(var k = 0; k < 4; k++){
+					tabImg[k].id = getPositionString(k);
+				}
 				var ligne = VerifLignes();
 				if (ligne != -1){
 					SupressionLignes(ligne);
@@ -273,6 +273,9 @@ var compt = 0;
 				bool=true;
 				plateau[i][j] == 2;
 				compt++;
+				for(var k = 0; k < 4; k++){
+					tabImg[k].id = getPositionString(k);
+				}
 				var ligne = VerifLignes();
 				if (ligne != -1){
 					SupressionLignes(ligne);
@@ -313,35 +316,6 @@ function createCase(i, j, couleur){
 //Fonction qui crée l'image d'une case à la position[i,j] et va choisir sa couleur en fonction de son typePiece
 	var img = document.createElement("img");
 	img.src = './images/Case'+ couleur +'.png';
-	/*switch(typePiece) {
-		case 1: //la pièce est de type I
-		img.src = './images/Case1.png';
-		break;
-		
-		case 2: //la pièce est de type O
-		img.src = './images/Case2.png';
-		break;
-		
-		case 3: //la pièce est de type L
-		img.src = './images/Case3.png';
-		break;
-		
-		case 4: //la pièce est de type J
-		img.src = './images/Case4.png';
-		break;
-		
-		case 5: //la pièce est de type S
-		img.src = './images/Case5.png';
-		break;
-		
-		case 6: //la pièce est de type Z
-		img.src = './images/Case6.png';
-		break;
-		
-		case 7: //la pièce est de type T
-		img.src = './images/Case7.png';
-		break;
-	}*/
 	document.getElementById("pieces").appendChild(img);
 	img.style.left = 24*i +"px";	
 	img.style.top = 24*j +"px";
@@ -564,7 +538,7 @@ var codeTouche = event.keyCode;
 	else{
 	    key ='undefined';
 	}
-        }
+}
 
 function affichage(){
 	setInterval(function(){
@@ -573,6 +547,20 @@ function affichage(){
 	  } 
 
 	}, 500);
+}
+
+function getPositionString(nbImg){
+//Retourne la position de l'image sous la forme "i-j"
+	var abs = getPxLeft(nbImg)/24;
+	var ord = getPxTop(nbImg)/24;
+	var str = abs + "-" + ord;
+	return str;
+}
+
+function recupImage(axeI, axeJ){
+//Retourne l'image avec les coordonnées [axeI, axeJ]
+	var img = document.getElementById(axeI+"-"+axeJ);
+	return img;
 }
 
 
