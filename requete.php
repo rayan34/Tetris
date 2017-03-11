@@ -50,6 +50,7 @@ class Model {
     }
 
     public static function selectHighScore() {
+    //fonction qui va permettre de recuperer le meilleur score
         try {
             // préparation de la requête
             $sql = "SELECT * FROM score WHERE score = (SELECT MAX(score) from score);"; 
@@ -73,6 +74,3 @@ Model::init_pdo();
 
 // on lance la fonction selectByName avec le nom obtenu
 $res = Model::selectHighScore();
-
-//on affiche le résultat avec une fonction plus lisible par js
-//echo json_encode($res);

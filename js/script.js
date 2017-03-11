@@ -4,20 +4,20 @@
 var plateau;					//plateau de jeu
 var score = 0;					//score du joueur
 var nbLignes = 0;				//nombre de lignes validées par le joueur
-var typePiece = randomPiece();	//type de la pièce 
-var perdu = false;
-var tabImg =  [null,null,null,null];
-var rotation = 0;
-var piece = 0;
+var perdu = false;				//devient true quand le joueur a perdu
+var tabImg =  [null,null,null,null];	//tableau des images a manipuler (4 pour chaque piece)
+var rotation = 0;						//etape de rotation pour chaque piece
+var piece = 0;							//type de piece actuel
 
 
 
-//document.body.onload = init;
+//lancement de la fonction init() qui initialise la partie
 init();
 
 //FONCTIONS
 
 function init(){
+//initialise la partie
 	document.getElementById('pieces').innerHTML = "";
 	initializePlateau();
 	genererPiece(randomPiece());
@@ -26,6 +26,7 @@ function init(){
 }
 
 function getScore() {
+//affiche le score actuel du joueur dans la balise aside
 	document.getElementById("currentScore").innerHTML = score;
 }
 
@@ -56,7 +57,7 @@ function initializePlateau(){
 }
 
 function VerifLignes(){
-	// return la ligne à supprimer ou false ( conditions à mettre dans la boucles principale
+	// retourne la dernière ligne complete, sinon retourne -1
 	var bool = true;
 	var result = -1;
 	for(var j = 0; j < 20; j++){
@@ -80,6 +81,7 @@ function VerifLignes(){
 
 
 function SupressionLignes(ligne){
+//supprime toute la ligne passé en parametre
 	for(var i = 0; i < 10; i++){
 		plateau[i][ligne] = 0;
 		var img = recupImage(i,ligne);
@@ -93,6 +95,7 @@ function SupressionLignes(ligne){
 }
 
 function getPxTop(i){
+//retourne le style.top de l'image tabImg[i]
 	var str = "";
 	for(var a= 0 ; a<5; a++){
 		if(tabImg[i].style.top[a]!="p"){
@@ -103,7 +106,9 @@ function getPxTop(i){
 		}
 	} 
 }
+
 function getPxLeft(i){
+//retourne le style.left de l'image tabImg[i]
 	var str = "";
 	for(var a= 0 ; a<5; a++){
 		if(tabImg[i].style.left[a]!="p"){
@@ -116,6 +121,7 @@ function getPxLeft(i){
 }
 
 function getPxRight(i){
+//retourne le style.right de l'image tabImg[i]
 	var str = "";
 
 	for(var a= 0 ; a<5; a++){
@@ -128,7 +134,7 @@ function getPxRight(i){
 	} 
 }
 
-// Pareil que colision down
+
 function verifPieceBloque(){
 //Fonction qui renvoie true si la pièce est bloqué par en dessous
 	var resultat = false;
@@ -192,7 +198,7 @@ function moveDownAll(limite){
 }
 
 function moveLeftPiece(){
-//Fonction qui déplace la pièce d'une case la gauche
+//Fonction qui déplace la pièce d'une case vers la gauche
 	var a=0;
 	if(colisionLeft()==false){				
 	for(var i = 0; i < 10; i++){
@@ -211,7 +217,7 @@ function moveLeftPiece(){
 }
 
 function moveRightPiece(){ 
-//Fonction qui déplace la pièce d'une vers la droite
+//Fonction qui déplace la pièce d'une case vers la droite
 	var a=0;
 	if(colisionRight()==false){
 		for(var i = 9; i >= 0; i--){
@@ -230,6 +236,7 @@ function moveRightPiece(){
 }
 
 function colisionLeft(){
+//retourne true si il y a une colision à gauche de la piece
 var bool=false;
 	for(var i = 0; i <= 9; i++){
 		for(var j = 0; j <= 19; j++){
@@ -248,6 +255,7 @@ var bool=false;
 }
 
 function colisionRight(){
+//retourne true si il y a une colision à droite de la piece
 var bool=false;
 	for(var i = 9; i >= 0; i--){
 		for(var j = 0; j <= 19; j++){
@@ -263,6 +271,7 @@ var bool=false;
 }
 
 function colisionDown(){
+	//retourne true si il y a une colision en dessous de la piece
 var bool=false;
 var compt = 0;
 	for(var i = 0; i < 10; i++){
@@ -292,6 +301,7 @@ var compt = 0;
 }
 
 function estVide(i, j) {
+//retourne vrai si la case plateau[i][j] est egaleà 0
 	var verif = false;
 	if(i>=0 && i<10 && j>=0 && j<20) {
 		if(plateau[i][j] == 0) {
@@ -511,6 +521,7 @@ function genererPiece(typePiece) {
 */ 
 
 function move(event) {
+//fonction qui va lancer la bonne fonction de déplacement selon la touche pressé
 var codeTouche = event.keyCode;
        var key = ' ';
        if (codeTouche == 40){
@@ -536,6 +547,7 @@ var codeTouche = event.keyCode;
 }
 
 function affichage(){
+//fonction qui va faire descendre la piece actuel toutes les 500 millisecondes
 	setInterval(function(){
 	  if(moveDownPiece()==true){
 		if(genererPiece(randomPiece()) == false){
@@ -562,15 +574,18 @@ function recupImage(axeI, axeJ){
 }
 
 function modifyPositionImage(img, axeI, axeJ){
+//fonction qui va modifier l'enplacement de l'image img
 	img.style.left = axeI*24+"px";
 	img.style.top = axeJ*24+"px"
 }
 
 function getValeurTab(i, j){
+//retourne la valeur de la case plateau[i][j]
 	return plateau[i][j];
 }
 
 function rotate(){
+//va tourner la piece selon le type de piece et son etat de rotation
 	var i = getPxLeft(0)/24;
 	var j = getPxTop(0)/24;
 	switch(piece){
@@ -795,6 +810,7 @@ function rotate(){
 }
 
 function deleteOnes(){
+//supprime tout les 1 du plateau
 	for(var i = 0; i < 10; i++){
 		for(var j = 0; j < 20; j++){
 			if(plateau[i][j] == 1){
@@ -805,6 +821,7 @@ function deleteOnes(){
 }
 
 function showTableau(){
+//affiche toutes les cases du tableau plateau
 	var str = "";
 	for(var j = 0; j < 20; j++){
 		for(var i = 0; i < 10; i++){
@@ -817,10 +834,5 @@ function showTableau(){
 
 
 var b = document.body;
+//ajout du listener sur le body quand une touche est presé
 b.addEventListener('keydown',move);
-
-/*
-genererPiece(1);
-var b = document.body;
-b.addEventListener('keydown',move);
-*/
