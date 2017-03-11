@@ -259,25 +259,7 @@ var bool=false;
 var compt = 0;
 	for(var i = 0; i < 10; i++){
 		for(var j = 19; j >= 0; j--){
-			if(plateau[i][j] == 1 && j==19){
-				if(bool == false){
-					score = score+10;
-				}
-				plateau[i][j] == 2;
-				compt++;
-				for(var k = 0; k < 4; k++){
-					tabImg[k].id = getPositionString(k);
-				}
-				var ligne = VerifLignes();
-				if (ligne != -1){
-					if(bool == false){
-						score = score+100;
-					}
-					SupressionLignes(ligne);
-				}
-				bool=true;
-			}
-			if(plateau[i][j] == 1 && plateau[i][j+1]==2 ){
+			if(plateau[i][j] == 1 && (j==19 | plateau[i][j+1]==2)){
 				if(bool == false){
 					score = score+10;
 				}
